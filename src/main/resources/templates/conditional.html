@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Conditional</title>
+</head>
+<body>
+<h2>Conditional Expression</h2>
+<h2>If-then</h2>
+<!--
+Using Conditional Stateent In Thymeleaf
+The Elvis operator ?: lets us render text within an HTML element depending on the current state of a variable.
+-->
+<h2>If-Then</h2>
+<p th:text="${person1.address}?${person1.address.street}">Default Person1 Street</p>
+<p th:text="${person2.address}?${person2.address.street}:'If Not Address'">Default Person2 Street</p>
+
+<h2>If-Then-else</h2>
+<p th:text="${person1.address}?${person1.address.zipcode}:'Not Exist'">Default Zipcode</p>
+<p th:text="${person2.address}?${person2.address.zipcode}: 'Person 2 Doest Not Have An Address'">Default Zipcode</p>
+
+<h2>Elvis Operator</h2>
+<p th:text="${person1.address.street}?: 'You Are Welcome'">Default Person2 Street</p>
+<p th:text="${person2.address}?: 'You Are Welcome'">Default Person2 Street</p>
+
+<h2>If-Unless</h2>
+<p th:if="${gender=='F'}">Female</p>
+<p th:unless="${gender=='F'}">Male</p>
+
+
+<h2>Switch Case</h2>
+<td th:switch="0">
+    <span th:case="'0'">NO COURSES YET!</span>
+    <span th:case="'1'" th:text="${'You HAVE AN ADDRESS'}"></span>
+    <div th:case="*">
+        <div th:text="${'YOU CAN STAY 4 AWHILE'}"/>
+    </div>
+</td>
+</body>
+</html>

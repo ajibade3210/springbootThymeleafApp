@@ -8,10 +8,69 @@
 <body>
 <h1>Simple Expression</h1>
 <h2>Variable Expression</h2>
+<button th:href="@{/anotherSimpleexp}">Click Here To Another</button>
+
+<!--Recieving Data From the Contoller
+Using "th:text="${data.name}"
+This is how we declare a variable expression i Thymeleaf
+-->
 <p th:text="${person.id}"> ID: 0 </p>
 <p th:text="${person.name}">Name: Tina</p>
 <p>Address</p>
 <p th:text="${person.address.street}">Street: 1234 fadeyi</p>
 <p th:text="${person.address.zipcode}">Zipcode: 123456</p>
+
+<!--Creating a Selection Using ThymeLeaf "th:text="${data.name}"
+Using the Selection in Thymeleaf first
+select the object sent from the controlller
+Selection Variable Display exactly
+same way as using Variable Expression
+Just that we  select the object been sent intial,
+`th:object="${}"`
+Hence no need to call it again within oour
+selected div and appen * insted of $ to it
+-->
+
+<h2>Selection Variable Expression</h2>
+<div th:object="${person}">
+    <p th:text="*{id}"> ID: 0 </p>
+    <p th:text="*{name}">Name: Tina</p>
+    <p>Address</p>
+    <p th:text="*{address.street}">Street: 1234 fadeyi</p>
+    <p th:text="*{address.zipcode}">Zipcode: 123456</p>
+</div>
+
+<!--
+Message Expression In ThymeLeaf
+this is a way of recieving values from the .properties page
+First create a message.propertiees file....
+then include properties and call them in thymeleaf file
+th:text="#{properties.name}"
+
+If you want to name another properties file
+apart from message.properties file use this
+in the application.properties:
+spring.messages.basename=newPropertiesFileName
+-->
+<h2>Message Expression</h2>
+<p th:text="#{developer.name}">Default Developer Name</p>
+<p th:text="#{project.name}">Default Projec Name</p>
+
+<!--Link URL Exprssion In ThymeLeaf
+
+-->
+<p><a href="#" th:href="@{/user/1}">Link 1</a></p>
+<!--/user?id&name=MikeDoe-->
+<p><a href="#" th:href="@{/user(person.id,name=person.name)}">Query String URL Link 2</a></p>
+<p><a href="#" th:href="@{/user(id=person.id,)}">Query String URL Link 2</a></p>
+<!--/user/1/name/mikedoe-->
+<p><a href="#" th:href="@{/user/{uid}/name/uname(uid=${person.id},uname=${person.name})}">Path Variable Url</a></p>
+
+<p><a th:href="@{/order/details(id=${person.id},action=(${person.name} ? 'show_all' : 'show_public'))}"></a></p>
+<!--/home?action=show#all_info-->
+<p><a th:href="@{/home#all_info(action='show')}"></a></p>
+
+
+<button><a href="#" th:href="@{/anotherSimpleexp}">Click To Another</a></button>
 </body>
 </html>

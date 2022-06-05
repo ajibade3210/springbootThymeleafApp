@@ -24,4 +24,15 @@ public class SImpleExpressionController {
         model.addAttribute("person", person);
         return "simpleExpression";
     }
+
+    @GetMapping("/conditional")
+    public String conditionalExpression(Model model) {
+        Address address = new Address("100 Isaac John","10011" );
+        Person person1 = new Person(1,"Mike Doe", address);
+        Person person2 = new Person(1,"Ebere Doe", null);
+        model.addAttribute("person1", person1);
+        model.addAttribute("person2", person2);
+        model.addAttribute("gender", "F");
+        return "conditional";
+    }
 }
