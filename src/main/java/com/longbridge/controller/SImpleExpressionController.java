@@ -6,6 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 public class SImpleExpressionController {
 
@@ -34,5 +37,18 @@ public class SImpleExpressionController {
         model.addAttribute("person2", person2);
         model.addAttribute("gender", "F");
         return "conditional";
+    }
+
+    @GetMapping("/iteration")
+    public String iterationExpression(Model model) {
+        List<Person> people=Arrays.asList(
+                new Person(91,"josh"),
+                new Person(92,"dele"),
+                new Person(93,"sam"),
+                new Person(94,"ola")
+        );
+        model.addAttribute("people",people);
+        return "iteration";
+
     }
 }
